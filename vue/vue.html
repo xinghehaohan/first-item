@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table{
+            border: 3px solid #333333;
+        }
+        .pagination {
+            display: inline-block;
+            padding-left: 0;
+            margin: 21px 0;
+            border-radius: 3px;
+        }
+
+        .pagination > li {
+            display: inline;
+        }
+
+        .pagination > li > a {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            line-height: 1.5;
+            text-decoration: none;
+            color: #009a61;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-left: -1px;
+            list-style: none;
+        }
+
+        .pagination > li > a:hover {
+            background-color: #eee;
+        }
+
+        .pagination .active {
+            color: #fff;
+            background-color: #009a61;
+            border-left: none;
+            border-right: none;
+        }
+
+        .pagination .active:hover {
+            background: #009a61;
+            cursor: default;
+        }
+
+        .pagination > li:first-child > a .p {
+            border-bottom-left-radius: 3px;
+            border-top-left-radius: 3px;
+        }
+
+        .pagination > li:last-child > a {
+            border-bottom-right-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="paginationapp">
+        <ul class="pagination">
+            <li v-for="n in pageCount">
+                <a href="javascripit:void(0)" v-bind:class="activeNumber === n + 1 ? 'active' : ''">{{ n + 1 }}</a>
+
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="app" class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr v-for="person in people">
+                <td>{{person.product_asin}}</td>
+                <td><img v-bind:src=person.product_img></td>
+                <td>{{person.quantity}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script src="//cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
+<script>
+    var vm = new  Vue({
+        el:'#app',
+        data:{ people: JSON.parse("[{\"update_time\": 1481627531033, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"61562faf-db7f-4529-98e5-e776a095e925\", \"product_name\": \"Hoddmimis Home & Living Jewelry Storage Organizer BJSO03\", \"product_asin\": \"B01HK9GCLY\", \"id\": \"655b39a8-d7e0-47a5-b144-020376533270\", \"product_img\": \"http://ecx.images-amazon.com/images/I/4108OndKvnL._SL75_.jpg\", \"quantity\": 61}, {\"update_time\": 1481627530878, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"29c12b71-1748-4d35-89af-6a5a82015f58\", \"product_name\": \"WildbirdCare Metal Hummingbird Feeder BTF04\", \"product_asin\": \"B01HE00WNI\", \"id\": \"545fd10e-2573-4d9a-9350-08e2d0318c4b\", \"product_img\": \"http://ecx.images-amazon.com/images/I/51cQpgcZu9L._SL75_.jpg\", \"quantity\": 46}, {\"update_time\": 1481627531049, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"809d844a-cf31-457d-bddb-33c2402ad9a4\", \"product_name\": \"Hoddmimis Wooden Bookends Decorative Book Ends Kids Gift EBE02 Elephant\", \"product_asin\": \"B01HK8USCY\", \"id\": \"a12bcfdf-d09f-4ad8-9b51-c58d67f3f3fc\", \"product_img\": \"http://ecx.images-amazon.com/images/I/31zzWmjARJL._SL75_.jpg\", \"quantity\": 46}, {\"update_time\": 1481627530965, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"0d6c900a-53f2-4bae-8ce4-ccfca07c7f6f\", \"product_name\": \"Hoddmimis Wooden Bookends Decorative Book Ends Kids Gift BBE01 Butterfly\", \"product_asin\": \"B01HK8USBK\", \"id\": \"4b44a6f3-11c1-408e-bcf6-f65a72ced46f\", \"product_img\": \"http://ecx.images-amazon.com/images/I/31gcfack1IL._SL75_.jpg\", \"quantity\": 45}, {\"update_time\": 1481627530947, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"55ef1e5a-1de7-4f66-b49d-d2a36fd15060\", \"product_name\": \"WildBird Care Hanging Birdhouse Bird Nesting House BRH02\", \"product_asin\": \"B01HRFJ95M\", \"id\": \"fe874494-5ce8-466e-b2bd-f9a0336aa415\", \"product_img\": \"http://ecx.images-amazon.com/images/I/41ekaI3kpjL._SL75_.jpg\", \"quantity\": 44}, {\"update_time\": 1481627530793, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"b2cb5e3d-bd3a-4a15-9c0e-10e3f55a42dd\", \"product_name\": \"Hoddmimis Wooden Bookends Decorative Book Ends Kids Gift FBE06 Butterfly\", \"product_asin\": \"B01HK8US8S\", \"id\": \"87648080-3268-42a2-9cc0-cf284bb1df5f\", \"product_img\": \"http://ecx.images-amazon.com/images/I/51j%2BoE5T0xL._SL75_.jpg\", \"quantity\": 37}, {\"update_time\": 1481627530982, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"52eaa1a3-c587-40c4-bed4-a1a489e06514\", \"product_name\": \"Hoddmimis Wooden Bookends Decorative Book Ends Kids Gift OBE04 Birds\", \"product_asin\": \"B01HK8USGA\", \"id\": \"25d36944-a580-469d-a7c0-87ab4a748413\", \"product_img\": \"http://ecx.images-amazon.com/images/I/312ptheYgbL._SL75_.jpg\", \"quantity\": 37}, {\"update_time\": 1481627530860, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"3aaed26f-e706-47b2-b4f3-c30675e2faad\", \"product_name\": \"Hoddmimis Wooden Bookends Decorative Book Ends Kids Gift SBE05 Balls\", \"product_asin\": \"B01HK8USB0\", \"id\": \"d3548c9d-6737-4ade-95fb-4a04386243e9\", \"product_img\": \"http://ecx.images-amazon.com/images/I/41Yn27etufL._SL75_.jpg\", \"quantity\": 36}, {\"update_time\": 1481627530810, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"5296fdbd-8057-416c-abda-3f0053deedc2\", \"product_name\": \"Hoddmimis Coat Hook 3 Packs Children Clothes Hooks ECR12 Elephant\", \"product_asin\": \"B01HK8FP4U\", \"id\": \"ee4f6265-8f2f-42ad-b280-a20a3ca98a99\", \"product_img\": \"http://ecx.images-amazon.com/images/I/31vG2H1YlSL._SL75_.jpg\", \"quantity\": 31}, {\"update_time\": 1481627530927, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"8fbd9202-daf7-4daf-a498-6d2980f7b60a\", \"product_name\": \"Hoddmimis Coat Hook 3 Packs Children Clothes Hooks BCR15 Birds\", \"product_asin\": \"B01HK8FP1I\", \"id\": \"d92c99b3-0d28-447a-9e17-9c9168545233\", \"product_img\": \"http://ecx.images-amazon.com/images/I/41EOMTso3%2BL._SL75_.jpg\", \"quantity\": 30}, {\"update_time\": 1481627530775, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"a301cbeb-6bc9-4166-ab23-9467d210bd36\", \"product_name\": \"WildBirdCare Multi-use Metal Bird Feeder BTF02\", \"product_asin\": \"B01CRZ9GL4\", \"id\": \"e92a788a-7119-496d-84ff-69fdb6c8841d\", \"product_img\": \"http://ecx.images-amazon.com/images/I/417wozg6MNL._SL75_.jpg\", \"quantity\": 29}, {\"update_time\": 1481627530893, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"daf8bb2a-34f7-4de8-ab05-1173b7668299\", \"product_name\": \"Hoddmimis Jewelry Box Organizer with Mirror Large Size BMB02 Butterfly\", \"product_asin\": \"B01HK9CY0C\", \"id\": \"bc2948d3-e4fe-47eb-b9cf-97a9753b1885\", \"product_img\": \"http://ecx.images-amazon.com/images/I/417wH6sw3UL._SL75_.jpg\", \"quantity\": 24}, {\"update_time\": 1481627530844, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"d73f234d-7a1d-4a76-bf62-90a2ca645e43\", \"product_name\": \"Hoddmimis Coat Hook 3 Packs Children Clothes Hooks OCR14 Owls\", \"product_asin\": \"B01HK8FOWS\", \"id\": \"7b90e5f4-80b0-45ba-852e-77d85b43e813\", \"product_img\": \"http://ecx.images-amazon.com/images/I/31MOV873w5L._SL75_.jpg\", \"quantity\": 22}, {\"update_time\": 1481627530999, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"91099866-ef61-49ef-92a3-66b5f38abc0e\", \"product_name\": \"Hoddmimis Home & Living Jewelry Storage Organizer OJSO01\", \"product_asin\": \"B01HK9GCN2\", \"id\": \"e570b24f-36fa-4591-834e-d0aa752fb77a\", \"product_img\": \"http://ecx.images-amazon.com/images/I/41IbRes1ZuL._SL75_.jpg\", \"quantity\": 22}, {\"update_time\": 1481627531065, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"3e9006e7-4607-4e1b-ac54-805c169e6474\", \"product_name\": \"Hoddmimis Wooden Bookends Decorative Book Ends Kids Gift OBE03 Owls\", \"product_asin\": \"B01HK8US9C\", \"id\": \"307a627c-4dbb-48fc-97ef-49ddd19665a7\", \"product_img\": \"http://ecx.images-amazon.com/images/I/51Elst3LS7L._SL75_.jpg\", \"quantity\": 9}, {\"update_time\": 1481627530828, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"0615726f-f299-4798-9f3e-840fe8dfb76a\", \"product_name\": \"Hoddmimis Growth Chart Height Ruler Kids Room Decor HER02 (Butterfly)\", \"product_asin\": \"B01HK7RZVM\", \"id\": \"2ac05920-e8a2-4cbd-a9f1-63e22898e7ed\", \"product_img\": \"http://ecx.images-amazon.com/images/I/31OI4-59CVL._SL75_.jpg\", \"quantity\": 4}, {\"update_time\": 1481627530910, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"c3bd1da4-6805-4e01-aac2-567faef0175b\", \"product_name\": \"Hoddmimis Twirling Ballerina Musical Box Jewelry Music Box ETO01 Big Size\", \"product_asin\": \"B01HK9PS1O\", \"id\": \"ffd7b7dd-98af-4f79-a154-7c2ba9b2b96f\", \"product_img\": \"http://ecx.images-amazon.com/images/I/419iSTGDAxL._SL75_.jpg\", \"quantity\": 0}, {\"update_time\": 1481627530758, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"fb81ba21-fccd-4ba4-b298-1f16f6e4e3dc\", \"product_name\": \"Hoddmimis Jewelry Box Jewellery Storage 5-Tray Organizer BTO02\", \"product_asin\": \"B01HK9PSC8\", \"id\": \"ade8f912-e426-4f9e-9489-28f15706cb84\", \"product_img\": \"http://ecx.images-amazon.com/images/I/41efXqaRdrL._SL75_.jpg\", \"quantity\": 0}, {\"update_time\": 1481627531016, \"house_id\": \"af1e5cdb-b936-4fca-8171-569b0a21e40c\", \"product_id\": \"9ff7534f-c625-4bf0-93dd-9a242b92c712\", \"product_name\": \"Hoddmimis Home & Living Jewelry Storage Organizer BJSO04\", \"product_asin\": \"B01HK9GCOG\", \"id\": \"6994f66b-e9fc-4f00-aa5f-87c952eb95fe\", \"product_img\": \"http://ecx.images-amazon.com/images/I/41dV6jKeWAL._SL75_.jpg\", \"quantity\": 0}]"
+        )}
+    });
+    var vn = new  Vue({
+       el:'#paginationapp' ,
+        data: {
+            activeNumber: 1,
+            pageCount: 10
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VUE</title>
+    <link rel="stylesheet" href="demo1.css">
+</head>
+<body>
+<div id="app">
+    <fieldset>
+        <lengen>新建个人信息</lengen>
+        <div class="form-group">
+            <label>姓名：</label>
+            <input type="text" v-model="newPerson.name"/>
+        </div>
+        <div class="form-group">
+            <label>年龄：</label>
+            <input type="text" v-model="newPerson.age"/>
+        </div>
+        <div class="form-group">
+            <label>性别：</label>
+            <select v-model="newPerson.sex">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label></label>
+            <button @click="creatPerson">新建</button>
+        </div>
+    </fieldset>
+    <table>
+        <thead>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>删除</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="person in people">
+            <td>{{person.name}}</td>
+            <td>{{person.age}}</td>
+            <td>{{person.sex}}</td>
+            <td :class="'text-center'"><button @click="deletePerson($index)">删除</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--<script src="//cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>-->
+<script src="//cdn.bootcss.com/vue/1.0.25/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            newPerson:{
+                name:'',
+                age:'',
+                sex:'Male'
+            },
+            people: [{
+                name: 'Jack',
+                age: 30,
+                sex: 'Male'
+            }, {
+                name: 'Bill',
+                age: 26,
+                sex: 'Male'
+            }, {
+                name: 'Tracy',
+                age: 22,
+                sex: 'Female'
+            }, {
+                name: 'Chris',
+                age: 36,
+                sex: 'Male'
+            }]
+        },
+        methods:{
+            creatPerson:function () {
+                this.people.push(this.newPerson);
+                //添加newPerson对象后，重置newPerson对象
+                this.newPerson={
+                    name:'',
+                    age:'',
+                    sex:'Male'
+                }
+            },
+            deletePerson:function (index) {
+                //删除当前数组元素
+                //v-for指令遍历数组时，$index是默认的当前的索引名称
+                this.people.splice(index,1)
+            }
+        }
+    })
+</script>
+</body>
+</html>
