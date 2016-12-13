@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h3 id="contdown"></h3>
+</div>
+<script>
+    window.onload = function(){
+        showtime();
+        function addZero(i){
+            if(i<10){
+                i = "0" + i;
+            }return i;
+        }
+        function showtime() {
+            var nowtime = new Date();
+            var endtime = new Date("2016/12/20,20:20:20");
+            var lefttime = parseInt((endtime.getTime() - nowtime.getTime()) / 1000);
+            var d = parseInt(lefttime / (24 * 60 * 60));
+            var h = parseInt(lefttime / (60 * 60) % 24);
+            var m = parseInt(lefttime / 60 % 60);
+            var s = parseInt(lefttime % 60);
+            h = addZero(h);
+            m = addZero(m);
+            s = addZero(s);
+            document.getElementById("contdown").innerHTML = "倒计时    " + d + ":" + h + ":" + m + ":" + s;
+            if(lefttime<=0){
+                document.getElementById("contdown").innerHTML = "活动已结束";
+                return;
+            }
+            setTimeout(showtime,1000);
+        }
+    }
+
+
+
+</script>
+</body>
+</html>
