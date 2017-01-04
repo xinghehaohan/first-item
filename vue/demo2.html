@@ -2,9 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <link rel="stylesheet" href="demo1.css">
 </head>
 <body>
-$END$
+<div id="app">
+    <table>
+        <tr>
+            <th colspan="3">父组件数据</th>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>{{name}}</td>
+            <td><input type="text" v-model="name"></td>
+        </tr>
+        <tr>
+            <td>age</td>
+            <td>{{age}}</td>
+            <td><input type="text" v-model="age"></td>
+        </tr>
+    </table>
+    <my-component v-bind:my-name.once="name" v-bind:my-age.once="age"></my-component>
+</div>
+<template id="myComponent">
+    <table>
+        <tr>
+            <th colspan="3">子组件数据</th>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>{{myName}}</td>
+            <td><input type="text" v-model="myName"></td>
+        </tr>
+        <tr>
+            <td>age</td>
+            <td>{{myAge}}</td>
+            <td><input type="text" v-model="myAge"></td>
+        </tr>
+    </table>
+</template>
+<script src="//cdn.bootcss.com/vue/1.0.25/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            name:'susu',
+            age:'17'
+        },
+        components:{
+            'my-component':{
+                template:'#myComponent',
+                props:['myName','myAge']
+            }
+        }
+    })
+</script>
 </body>
 </html>

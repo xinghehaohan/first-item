@@ -2,9 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <style>
+        #app{
+            float: right;
+        }
+    </style>
 </head>
 <body>
-$END$
+<div id="app">
+    <ol>
+        <todo-item v-for="item in message" :todo="item"></todo-item>
+    </ol>
+</div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+
+Vue.component('todo-item',{
+   props:['todo'],
+    template :'<li>{{todo.text}}</li>'
+});
+var app = new Vue({
+    el: '#app',
+    data: {
+        message:[
+            {text:'a'},
+            {text:'b'},
+            {text:'c'},
+            {text:'g'}
+        ]
+    }
+})
+</script>
 </body>
 </html>

@@ -2,9 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .router-link-active {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-$END$
+<script src="//cdn.bootcss.com/vue/2.1.0/vue.js"></script>
+<script src="//cdn.bootcss.com/vue-router/2.1.1/vue-router.common.js"></script>
+<div id="app">
+    <h1>hello world</h1>
+    <!--<ul class="list-group">-->
+        <!--<li class="list-group-item">发件箱</li>-->
+      <!---->
+    <!--</ul>-->
+    <router-link to="/foo">GO FOO</router-link>
+    <router-link to="/bar">GO Bar</router-link>
+    <router-view></router-view>
+</div>
+<script>
+    const Foo= {
+        templet:'<div>woshi foo</div>'
+    };
+    const Bar={
+      templet:'<div>woshi bar</div>'
+    };
+
+    const routes = [
+        { path: '/foo', component: Foo },
+        { path: '/bar', component: Bar }
+    ]
+    const router = new VueRouter({
+        routes:routes
+    });
+
+    const app = new Vue({
+        router
+    }).$mount('#app')
+
+</script>
 </body>
 </html>
