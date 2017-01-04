@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>番茄钟</title>
+    <!--<link rel="stylesheet" href="timer.css">-->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: #333;
+            text-align: center;
+            color: #fff;
+        }
+        h1{
+            margin-top: 20px;
+            margin-bottom: 40px;
+            font-size: 50px;
+            font-family: 'Pacifico';
+        }
+        .top>div{
+            display: inline-block;
+            margin: 0 15px;
+        }
+        .top p{
+            font-family: Open Sans, Arial;
+            margin: 20px;
+            font-size: 25px;
+        }
+        .top span{
+            margin: 0 5px;
+            font-size: 35px;
+        }
+        .top button{
+            cursor: pointer;
+            vertical-align: 20%;
+            padding: 0 10px;
+            font-size: 25px;
+            background: #333;
+            border: none;
+            color: #fff;
+        }
+        .top button:checked{
+            outline: none;
+            border: none;
+        }
+        .top button:active{
+            outline: none;
+            border: none;
+        }
+        .top button:visited{
+            outline: none;
+            border: none;
+        }
+        .clock{
+            height: 300px;
+            width: 300px;
+            margin: 20px auto;
+            border: 2px solid #99CC00;
+            border-radius: 50%;
+            position: relative;
+            z-index: 20;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .clock:before{
+            content: '';
+            border: 4px solid #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+        .clock p{
+            height: 150px;
+            font-size: 40px;
+            line-height: 150px;
+            background: transparent;
+        }
+        #fill{
+            width: 300px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+    </style>
+</head>
+<body>
+<h1>RestMoment</h1>
+<div class="main">
+    <div class="top">
+        <div class="top-left">
+            <p>休息时间</p>
+            <button id="blreduce">-</button>
+            <span id="blnum">5</span>
+            <button id="bladd">+</button>
+        </div>
+        <div class="top-right">
+            <p>学习时间</p>
+            <button id="slreduce">-</button>
+            <span id="slnum">25</span>
+            <button id="sladd">+</button>
+        </div>
+    </div>
+    <div class="clock" id="clock">
+        <p id="timename">专心学习哦</p>
+        <p id="timer">25</p>
+        <span id="fill"></span>
+    </div>
+    <audio id="audio" style="display: none" src="ling.mp3" controls="controls"></audio>
+</div>
+<script>
+    var resttime = document.getElementById("blnum");
+    var studytime = document.getElementById("slnum");
+    var timeName = document.getElementById("timename");
+    var relTime = document.getElementById("timer");
+    var clock = document.getElementById("clock");
+    var fill = document.getElementById("fill");
+    var audio = document.getElementById("audio");
+    var stopTime = false;
+
+
+
+    var restSecond = 60 * resttime.innerHTML + 1;
+    var studySecond = 60 * studytime.innerHTML + 1;
+
+    function learning() {
+         if(stopTime){
+             studySecond--;
+             var h = Math.floor(studySecond / 3600);
+             var m = Math.floor(studySecond % 3600 / 60 );
+             var s = Math.floor(studySecond % 3600 % 60 );
+             var fillLength = 1 - (studySecond / (studytime.innerHTML * 60));
+             fill.style.height = fillLength * 300 +'px';
+             fill.style.background = '#99CC00';
+             clock.style.borderColor = '#99CC00';
+             timeName.innerHTML = "专心学习哦";
+             relTime.innerHTML = (
+                     (h > 0 ? h +':'+(m < 10 ? '0':''):'') + m + ':' +(s < 10 ?'0':'') + s
+             );
+             var setTime = setTimeout(learning,1000);
+             if(studySecond < 0){
+                 clearInterval(setTime);
+                 restSecond = 60 * resttime.innerHTML +1;
+                 audio.play();
+                 resting();
+             }
+         }
+    }
+
+    function resting () {
+        if (stopTime){
+            restSecond--;
+            var h1 = Math.floor( restSecond /3600);
+            var m1 = Math.floor( restSecond %3600 / 60);
+            var s1 = Math.floor( restSecond %3600 % 60);
+            var fillLength = 1 - (restSecond / (resttime.innerHTML*60));
+            fill.style.height = fillLength * 300 +'px';
+            clock.style.borderColor = '#ff4444';
+            fill.style.background = "#FF4444";
+            timeName.innerHTML = '休息一下吧';
+            relTime.innerHTML = (
+                    (h1 >0 ? h1 + ':'+(m1 < 10 ?'0':''):'') + m1 + ':'+(s1 < 10 ? '0':'')+s1
+            );
+            var setTimes = setTimeout(resting,1000);
+            if(restSecond < 0){
+                clearInterval(setTimes);
+                studySecond = 60 * studytime.innerHTML  +1;
+                audio.play();
+                learning();
+            }
+
+        }
+    }
+    //判断点击状态
+    clock.onclick = function ifStop () {
+      if(stopTime){
+          stopTime = false ;
+      }  else {
+          stopTime = true ;
+          if( timeName.innerHTML !=='休息一下吧'){
+              learning();
+          }else {
+              resting();
+          }
+      }
+      console.log(stopTime);
+    };
+
+
+    //改变时间函数
+    function changeTime() {
+        var btn = document.getElementsByTagName("button");
+        if (stopTime === false){
+            btn[0].onclick = function () {
+                if(resttime.innerHTML > 1){
+                    resttime.innerHTML--;
+                    restSecond = 60 * resttime.innerHTML +1;
+                }else {
+                    alert('时间不可以为零哦');
+                }
+            };
+
+            btn[1].onclick = function () {
+                resttime.innerHTML++;
+                restSecond = 60 *resttime.innerHTML +1;
+            };
+
+            btn[2].onclick = function () {
+                if (studytime.innerHTML > 1){
+                    studytime.innerHTML--;
+                    studySecond = 60 * studytime.innerHTML +1;
+                }else {
+                    alert('时间不可以为零哦')
+                }
+            };
+
+            btn[3].onclick = function () {
+                studytime.innerHTML ++;
+                studySecond = 60 * studytime.innerHTML +1;
+            }
+
+        }else {
+            for (var i = 0; i < btn.length ; i++){
+                btn[i].onclick = function () {
+                    alert('先暂停，才能修改时间哦');
+                }
+            }
+        }
+    }
+    setInterval(changeTime,1000);
+</script>
+
+</body>
+</html>
