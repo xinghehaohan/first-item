@@ -78,6 +78,14 @@
             right: 0;
             z-index: 2;
         }
+        input {
+            font-size: 25px;
+            border: none;
+            text-align: center;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+        }
         .clock p{
             height: 150px;
             font-size: 40px;
@@ -101,13 +109,13 @@
         <div class="top-left">
             <p>休息时间</p>
             <button id="blreduce">-</button>
-            <span id="blnum">5</span>
+            <input value="5" id="blnum">
             <button id="bladd">+</button>
         </div>
         <div class="top-right">
             <p>学习时间</p>
             <button id="slreduce">-</button>
-            <span id="slnum">25</span>
+            <input value="25" id="slnum">
             <button id="sladd">+</button>
         </div>
     </div>
@@ -130,8 +138,8 @@
 
 
 
-    var restSecond = 60 * resttime.innerHTML + 1;
-    var studySecond = 60 * studytime.innerHTML + 1;
+    var restSecond = 60 * resttime.value + 1;
+    var studySecond = 60 * studytime.value + 1;
 
     function learning() {
          if(stopTime){
@@ -139,7 +147,7 @@
              var h = Math.floor(studySecond / 3600);
              var m = Math.floor(studySecond % 3600 / 60 );
              var s = Math.floor(studySecond % 3600 % 60 );
-             var fillLength = 1 - (studySecond / (studytime.innerHTML * 60));
+             var fillLength = 1 - (studySecond / (studytime.value * 60));
              fill.style.height = fillLength * 300 +'px';
              fill.style.background = '#99CC00';
              clock.style.borderColor = '#99CC00';
@@ -150,7 +158,7 @@
              var setTime = setTimeout(learning,1000);
              if(studySecond < 0){
                  clearInterval(setTime);
-                 restSecond = 60 * resttime.innerHTML +1;
+                 restSecond = 60 * resttime.value +1;
                  audio.play();
                  resting();
              }
@@ -163,7 +171,7 @@
             var h1 = Math.floor( restSecond /3600);
             var m1 = Math.floor( restSecond %3600 / 60);
             var s1 = Math.floor( restSecond %3600 % 60);
-            var fillLength = 1 - (restSecond / (resttime.innerHTML*60));
+            var fillLength = 1 - (restSecond / (resttime.value*60));
             fill.style.height = fillLength * 300 +'px';
             clock.style.borderColor = '#ff4444';
             fill.style.background = "#FF4444";
@@ -174,7 +182,7 @@
             var setTimes = setTimeout(resting,1000);
             if(restSecond < 0){
                 clearInterval(setTimes);
-                studySecond = 60 * studytime.innerHTML  +1;
+                studySecond = 60 * studytime.value  +1;
                 audio.play();
                 learning();
             }
@@ -202,31 +210,31 @@
         var btn = document.getElementsByTagName("button");
         if (stopTime === false){
             btn[0].onclick = function () {
-                if(resttime.innerHTML > 1){
-                    resttime.innerHTML--;
-                    restSecond = 60 * resttime.innerHTML +1;
+                if(resttime.value > 1){
+                    resttime.value--;
+                    restSecond = 60 * resttime.value +1;
                 }else {
                     alert('时间不可以为零哦');
                 }
             };
 
             btn[1].onclick = function () {
-                resttime.innerHTML++;
-                restSecond = 60 *resttime.innerHTML +1;
+                resttime.value++;
+                restSecond = 60 *resttime.value +1;
             };
 
             btn[2].onclick = function () {
-                if (studytime.innerHTML > 1){
-                    studytime.innerHTML--;
-                    studySecond = 60 * studytime.innerHTML +1;
+                if (studytime.value > 1){
+                    studytime.value--;
+                    studySecond = 60 * studytime.value +1;
                 }else {
                     alert('时间不可以为零哦')
                 }
             };
 
             btn[3].onclick = function () {
-                studytime.innerHTML ++;
-                studySecond = 60 * studytime.innerHTML +1;
+                studytime.value ++;
+                studySecond = 60 * studytime.value +1;
             }
 
         }else {

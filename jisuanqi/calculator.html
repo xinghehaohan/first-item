@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #4CAF50;
+            font-size: 18px;
+        }
+        .wrap{
+            width: 320px;
+            margin: 0 auto;
+            margin-top: 100px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #FF5722;
+            text-align: center;
+        }
+        p{
+            margin-bottom: 10px;
+            font-family: 'Oleo Script', cursive;
+            color: #F19953;
+        }
+
+        .btn-wrap{
+            margin-top: 10px;
+        }
+        .btn-wrap button{
+            width: 70px;
+            height: 70px;
+            margin-bottom: 5px;
+            background-color: #fff;
+            border: none;
+            font-size: 15px;
+            color: #f19953;
+        }
+        .search{
+            text-align: center;
+        }
+        .search input{
+            margin: 0 auto;
+            padding: 0 10px;
+            width: 280px;
+            height: 34px;
+            font-size: 14px;
+            text-align: right;
+            border: 1px solid rgba(255,255,255,.8);
+            border-radius: 5px;
+            color: #fff;
+            background: rgba(0,0,0,.15);
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <p>susu</p>
+    <div class="search">
+        <input type="text" name="name" id="prt" value="" readonly>
+    </div>
+    <div class="btn-wrap">
+        <button value="AC">AC</button>
+        <button value="CE">CE</button>
+        <button value="%">%</button>
+        <button value="/">/</button>
+        <button value="7">7</button>
+        <button value="8">8</button>
+        <button value="9">9</button>
+        <button value="*">*</button>
+        <button value="4">4</button>
+        <button value="5">5</button>
+        <button value="6">6</button>
+        <button value="-">-</button>
+        <button value="1">1</button>
+        <button value="2">2</button>
+        <button value="3">3</button>
+        <button value="+">+</button>
+        <button value=".">.</button>
+        <button value="0">0</button>
+        <button value="Ans">Ans</button>
+        <button value="=">=</button>
+    </div>
+</div>
+<script charset="utf-8">
+    var values;
+    var txt = [];
+    var prt = document.getElementById("prt");
+    var rel;
+    function getValues() {
+        var btns = document.getElementsByTagName("button");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].onclick = function() {
+                values = this.value;
+
+                //switch语句
+                switch (values) {
+                    case "Ans":
+
+                        break;
+                    case "=":
+                        rel = eval(txt.join(""));
+                        prt.value = rel;
+                        txt = [];
+                        txt.push(rel);
+                        break;
+                    case "AC":
+                        prt.value = [];
+                        txt = [];
+                        break;
+                    case "CE":
+                        txt.pop();
+                        prt.value = txt.join("");
+                        break;
+                    default:
+                        txt.push(values);
+                        prt.value = txt.join("");
+                }
+
+                console.log(txt);
+            };
+        };
+    };
+    window.onload = getValues;
+</script>
+</body>
+</html>
