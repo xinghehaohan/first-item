@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #shan{
+            position: absolute;
+            top:0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100px;
+            border-radius: 50%;
+            height: 100px;
+            background: red;
+            box-shadow: 0 0 10px #f00;
+            animation: an .5s infinite alternate;
+        }
+        @keyframes an {
+            0%{
+                opacity: .5;
+                transform:scale(.8,.8)
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="shan">
+
+</div>
+
+</body>
+</html>

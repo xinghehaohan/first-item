@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: #0b7d10;
+        }
+        .item{
+            display:none;
+        }
+
+
+        .menu{
+            width: 20%;
+        }
+        #menu > li{
+            line-height: 40px;
+            display: block;
+            background: red;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+<div class="menu">
+    <ul id="menu">
+        <li onclick="showlist()">
+            <a href="#">list1</a>
+            <div class="item">
+                <ul>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li onclick="showlist()">
+            <a href="#">list1</a>
+            <div class="item">
+                <ul>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li onclick="showlist()">
+            <a href="#">list1</a>
+            <div class="item">
+                <ul>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li onclick="showlist()">
+            <a href="#">list1</a>
+            <div class="item">
+                <ul>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li onclick="showlist()">
+            <a href="#">list1</a>
+            <div class="item">
+                <ul>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                    <li><a href="#">bfdhkbfhkds</a></li>
+                </ul>
+            </div>
+        </li>
+
+    </ul>
+</div>
+<script>
+    function showlist() {
+        var item = document.getElementsByClassName('item');
+        for (var i = 0;i<item.length;i++){
+
+            (function (i) {
+               item[i].onclick = function () {
+                   alert(1)
+               }
+
+            })(i)
+
+
+        }
+    }
+</script>
+</body>
+</html>
